@@ -62,10 +62,11 @@ func main() {
 	//fmt.Print("%+v", m.Data)
 
 	for _, data := range m.Data {
-		// if data.KabupatenKota == "Kota Malang" {
-		// 	fmt.Printf("Nama Museum: %s \nKabupaten/Kota: %s \n\n", data.Nama, data.KabupatenKota)
-		// }
-		fmt.Println(data.KabupatenKota)
+		if data.KabupatenKota == "Kota Malang" {
+			fmt.Printf("Nama Museum: %s \nKabupaten/Kota: %s \n\n", data.Nama, data.KabupatenKota)
+
+		}
+		//fmt.Println(data.KabupatenKota)
 
 	}
 
