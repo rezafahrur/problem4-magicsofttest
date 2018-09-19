@@ -75,12 +75,13 @@ func main() {
 
 	for _, data := range m.Data {
 		if data.KabupatenKota == "Kota Malang" {
-			var d []string
-			d = append(d, data.MuseumID, data.KodePengelolaan, data.Nama, data.Sdm, data.AlamatJalan,
+			var mlg []string
+			// mlg = append(mlg[:0], "ID Museum", "Kode Pengelolaan", "Nama Museum", "SDM", "Alamat", "Desa/Kelurahan", "Kecamatan", "Kota", "Propinsi", "Lintang", "Bujur", "Koleksi", "Sumber Dana", "Pengelola", "Tipe", "Standar", "Tahun Berdiri", "Bangunan", "Luas Tanah", "Status Kepemilikan")
+			mlg = append(mlg, data.MuseumID, data.KodePengelolaan, data.Nama, data.Sdm, data.AlamatJalan,
 				data.DesaKelurahan, data.Kecamatan, data.KabupatenKota, data.Propinsi, data.Lintang, data.Bujur,
 				data.Koleksi, data.SumberDana, data.Pengelola, data.Tipe, data.Standar, data.TahunBerdiri, data.Bangunan,
 				data.LuasTanah, data.StatusKepemilikan)
-			err := tulisMalang.Write(d)
+			err := tulisMalang.Write(mlg)
 			if err != nil {
 				fmt.Println("Error : ", err)
 				return
@@ -90,6 +91,7 @@ func main() {
 
 		if data.KabupatenKota == "Kota Jakarta Pusat" {
 			var j []string
+			// j = append(j[:0], "ID Museum", "Kode Pengelolaan", "Nama Museum", "SDM", "Alamat", "Desa/Kelurahan", "Kecamatan", "Kota", "Propinsi", "Lintang", "Bujur", "Koleksi", "Sumber Dana", "Pengelola", "Tipe", "Standar", "Tahun Berdiri", "Bangunan", "Luas Tanah", "Status Kepemilikan")
 			j = append(j, data.MuseumID, data.KodePengelolaan, data.Nama, data.Sdm, data.AlamatJalan,
 				data.DesaKelurahan, data.Kecamatan, data.KabupatenKota, data.Propinsi, data.Lintang, data.Bujur,
 				data.Koleksi, data.SumberDana, data.Pengelola, data.Tipe, data.Standar, data.TahunBerdiri, data.Bangunan,
