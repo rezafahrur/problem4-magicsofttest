@@ -2,10 +2,12 @@ package main
 
 import (
 	"bytes"
+	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 type museum struct {
@@ -58,17 +60,47 @@ func main() {
 	if err != nil {
 		fmt.Println("Error!", err.Error())
 	}
+	//buat file malang
+	malang, err := os.Create("kota Malang.csv")
+	jakpus, err := os.Create("kota Jakarta Pusat.csv")
+	if err != nil {
+		fmt.Println("Error : ", err)
+		return
+	}
+	defer malang.Close()
+	defer jakpus.Close()
 
-	//fmt.Print("%+v", m.Data)
+	tulisMalang := csv.NewWriter(malang)
+	tulisJakpus := csv.NewWriter(jakpus)
 
 	for _, data := range m.Data {
 		if data.KabupatenKota == "Kota Malang" {
-			fmt.Printf("Nama Museum: %s \nKabupaten/Kota: %s \n\n", data.Nama, data.KabupatenKota)
-
+			var d []string
+			d = append(d, data.MuseumID, data.KodePengelolaan, data.Nama, data.Sdm, data.AlamatJalan,
+				data.DesaKelurahan, data.Kecamatan, data.KabupatenKota, data.Propinsi, data.Lintang, data.Bujur,
+				data.Koleksi, data.SumberDana, data.Pengelola, data.Tipe, data.Standar, data.TahunBerdiri, data.Bangunan,
+				data.LuasTanah, data.StatusKepemilikan)
+			err := tulisMalang.Write(d)
+			if err != nil {
+				fmt.Println("Error : ", err)
+				return
+			}
+			tulisMalang.Flush()
 		}
-		//fmt.Println(data.KabupatenKota)
+
+		if data.KabupatenKota == "Kota Jakarta Pusat" {
+			var j []string
+			j = append(j, data.MuseumID, data.KodePengelolaan, data.Nama, data.Sdm, data.AlamatJalan,
+				data.DesaKelurahan, data.Kecamatan, data.KabupatenKota, data.Propinsi, data.Lintang, data.Bujur,
+				data.Koleksi, data.SumberDana, data.Pengelola, data.Tipe, data.Standar, data.TahunBerdiri, data.Bangunan,
+				data.LuasTanah, data.StatusKepemilikan)
+			err := tulisJakpus.Write(j)
+			if err != nil {
+				fmt.Println("Error : ", err)
+				return
+			}
+			tulisJakpus.Flush()
+		}
 
 	}
-
-	fmt.Println()
 }
